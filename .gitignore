@@ -1,0 +1,9 @@
+node_modules/
+.env
+code/cache/
+*.pkl
+*.ff1pkl
+*.sqlite
+dist/
+build/
+__pycache__/
