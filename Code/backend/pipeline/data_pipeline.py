@@ -64,19 +64,37 @@ def process_race(year: int, track: str, save_path: str):
     gc.collect()
 
 def run_pipeline():
-    years = [2023, 2024, 2025]
-    track = "Bahrain"
+    years = [2022, 2023, 2024, 2025]
+    tracks = [
+    "Abu Dhabi",
+    "Austria",
+    "Bahrain",
+    "Barcelona",
+    "Brazil",
+    "COTA",
+    "Hungary",
+    "Jeddah",
+    "Melbourne",
+    "Monaco",
+    "Monza",
+    "Montreal",
+    "Qatar",
+    "Silverstone",
+    "Singapore",
+    "Spa",
+    "Suzuka"
+    ]
     
     save_path = r"C:\DevProjects\Race Strategy Optimization\Code\backend\data\processed"
     
     os.makedirs(save_path, exist_ok=True)
-
-    for year in years:
-        try:
-            print(f"Starting {track} {year}")
-            process_race(year, track, save_path)
-        except Exception as e:
-            print(f"Error processing {year}: {e}")
+    for track in tracks:
+        for year in years:
+            try:
+                print(f"Starting {track} {year}")
+                process_race(year, track, save_path)
+            except Exception as e:
+                print(f"Error processing {year}: {e}")
 
 if __name__ == "__main__":
     run_pipeline()
