@@ -103,36 +103,117 @@ This project combines:
 ```bash
 Race-Strategy-Optimization-System/
 │
-├── data/
-│   ├── raw/
-│   ├── processed/
-│   └── telemetry/
+├── backend/
 │
-├── notebooks/
-│   ├── exploratory_analysis.ipynb
-│   ├── feature_engineering.ipynb
-│   └── model_training.ipynb
+│   ├── api/
+│   │
+│   │   ├── cache/
+│   │   │
+│   │   ├── data/
+│   │   │   ├── raw/
+│   │   │   ├── processed/
+│   │   │   ├── telemetry/
+│   │   │   ├── weather/
+│   │   │   └── pitstop_data/
+│   │   │
+│   │   ├── features/
+│   │   │   ├── lap_times.ipynb
+│   │   │   ├── raw_calendars.ipynb
+│   │   │   ├── base_pace_builder.py
+│   │   │   ├── fuel_correction.py
+│   │   │   └── tyre_feature_engineering.py
+│   │   │
+│   │   ├── models/
+│   │   │
+│   │   │   ├── tyre_degradation/
+│   │   │   │   ├── degradation_model.py
+│   │   │   │   ├── degradation_utils.py
+│   │   │   │   ├── cliff_model.py
+│   │   │   │   └── fit_degradation_curves.py
+│   │   │   │
+│   │   │   ├── pace_models/
+│   │   │   │   ├── base_pace_model.py
+│   │   │   │   ├── fuel_model.py
+│   │   │   │   └── pace_adjustments.py
+│   │   │   │
+│   │   │   ├── simulation/
+│   │   │   │   ├── strategy_simulator.py
+│   │   │   │   ├── stint_simulator.py
+│   │   │   │   ├── lap_time_engine.py
+│   │   │   │   ├── pitstop_model.py
+│   │   │   │   ├── tyre_state.py
+│   │   │   │   ├── fuel_state.py
+│   │   │   │   └── race_constraints.py
+│   │   │   │
+│   │   │   ├── optimization/
+│   │   │   │   ├── strategy_optimizer.py
+│   │   │   │   ├── monte_carlo_simulator.py
+│   │   │   │   ├── strategy_generator.py
+│   │   │   │   └── stochastic_models.py
+│   │   │   │
+│   │   │   ├── evaluation/
+│   │   │   │   ├── evaluate_strategy.py
+│   │   │   │   ├── compare_predictions.py
+│   │   │   │   └── validation_metrics.py
+│   │   │   │
+│   │   │   └── saved_models/
+│   │   │       ├── all_tracks_degradation.pkl
+│   │   │       ├── track_base_pace.pkl
+│   │   │       ├── fuel_models.pkl
+│   │   │       ├── pitstop_loss.pkl
+│   │   │       └── tyre_cliff_models.pkl
+│   │   │
+│   │   ├── outputs/
+│   │   │   ├── simulations/
+│   │   │   ├── strategy_reports/
+│   │   │   ├── race_predictions/
+│   │   │   └── telemetry_exports/
+│   │   │
+│   │   ├── pipeline/
+│   │   │   ├── data_pipeline.py
+│   │   │   ├── preprocessing_pipeline.py
+│   │   │   ├── simulation_pipeline.py
+│   │   │   └── training_pipeline.py
+│   │   │
+│   │   ├── scripts/
+│   │   │   ├── run_simulation.py
+│   │   │   ├── train_degradation_models.py
+│   │   │   ├── generate_strategy_report.py
+│   │   │   └── benchmark_strategies.py
+│   │   │
+│   │   ├── visualizations/
+│   │   │   ├── tyre_deg_plots.py
+│   │   │   ├── strategy_comparison.py
+│   │   │   ├── race_trace_visualizer.py
+│   │   │   └── telemetry_dashboard.py
+│   │   │
+│   │   └── notebooks/
+│   │       ├── race_strat_optimization_model.ipynb
+│   │       ├── DetailsExtractedForARace.ipynb
+│   │       ├── degradation_analysis.ipynb
+│   │       └── stint_analysis.ipynb
+│   │
+│   └── requirements.txt
 │
-├── models/
-│   ├── saved_models/
-│   └── evaluation/
+├── frontend/
+│   ├── dashboard/
+│   ├── strategy-viewer/
+│   ├── telemetry/
+│   └── race-comparison-ui/
 │
-├── scripts/
-│   ├── data_collection.py
-│   ├── preprocessing.py
-│   ├── training.py
-│   └── simulation.py
+├── docs/
+│   ├── architecture.md
+│   ├── tyre_modeling.md
+│   ├── simulation_engine.md
+│   └── optimization_notes.md
 │
-├── api/
-│   ├── routes/
-│   ├── services/
-│   └── main.py
+├── tests/
+│   ├── test_degradation.py
+│   ├── test_strategy_simulator.py
+│   ├── test_fuel_model.py
+│   └── test_optimizer.py
 │
-├── visualizations/
-│
-├── requirements.txt
-├── README.md
-└── .gitignore
+└── README.md
 ```
 
 ---
