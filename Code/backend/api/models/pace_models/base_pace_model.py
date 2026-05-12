@@ -42,4 +42,9 @@ for file in parquet_files:
     
     base_pace = best_laps["LapTimeSeconds"].median()
     
+    track_base_pace[track_name] = round(base_pace,3)
     
+    print(f"{track_name}: {base_pace}")
+
+with open(output_path, "wb")as f:
+    pickle.dump(track_base_pace, f)
