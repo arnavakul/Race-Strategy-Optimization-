@@ -75,6 +75,7 @@ for track in tracks:
             BASE_DIR,
             "data",
             "processed",
+            "clean_laps",
             f"{track}_{year}.parquet"
         )
 
