@@ -1,6 +1,7 @@
 import os
 import pickle
 import random
+from fuel_state import FuelState
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
@@ -51,16 +52,11 @@ print(get_degradation(
     10
 ))
 
-def get_fuel_correction(current_lap):
-    fuel_gain_per_lap = 0.035
-    return current_lap*fuel_gain_per_lap
-
-
 def compute_lap_time(
         track, 
         compound,
         tyre_age,
-        current_lap
+        fuel_correction
     ):
         base_pace = get_base_pace(track)
         
@@ -68,11 +64,7 @@ def compute_lap_time(
         degradation = get_degradation(
             track,compound,tyre_age
         )
-        
-        fuel_correction = get_fuel_correction(
-            current_lap
-        )
-        
+                
         lap_time = base_pace + degradation - fuel_correction
         return {
             "lap_time": float(lap_time),
@@ -80,13 +72,22 @@ def compute_lap_time(
             "degradation": float(degradation),
             "fuel_correction": float(fuel_correction)
         }
+        
 def main():
+
+    fuel = FuelState(
+        starting_fuel=100,
+        fuel_burn_per_lap=1.8,
+        fuel_effect_per_kg=0.035
+    )
+
+    fuel_correction = fuel.getFuelCorrection()
 
     result = compute_lap_time(
         track="bahrain_2022",
         compound="MEDIUM",
         tyre_age=12,
-        current_lap=15
+        fuel_correction=fuel_correction
     )
 
     print(result)
