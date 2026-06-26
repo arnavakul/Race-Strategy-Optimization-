@@ -1,0 +1,28 @@
+{
+    "track": "monza",
+    "source": "historical",
+    "fastest_compound": "HARD",
+    "degradation": {
+        "SOFT": {
+            "lap_5": 4.782,
+            "lap_10": 5.763,
+            "lap_15": 6.428,
+            "deg_rate": 0.1646,
+            "cliff_age": 12
+        },
+        "MEDIUM": {
+            "lap_5": 7.907,
+            "lap_10": 9.549,
+            "lap_15": 10.663,
+            "deg_rate": 0.2756,
+            "cliff_age": 20
+        },
+        "HARD": {
+            "lap_5": 3.052,
+            "lap_10": 3.164,
+            "lap_15": 3.231,
+            "deg_rate": 0.0179,
+            "cliff_age": 28
+        }
+    }
+}

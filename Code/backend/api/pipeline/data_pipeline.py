@@ -532,22 +532,15 @@ def run_weekend_pipeline():
     # ]
     
     tracks = [
-        "Monaco",
-        # "Miami",
-        # "Shanghai",
-        # "Suzuka",
-        # "Mexico City",
-        # "Las Vegas",
-        # "Baku",
-        # "Zandvoort"
+        "Barcelona",
     ]
 
     sessions = [
-        # "FP1",
-        # "FP2",
+        "FP1",
+        "FP2",
         "FP3",
-        # "Q",
-        # "R"
+        "Q",
+        "R"
     ]
 
     save_path = (

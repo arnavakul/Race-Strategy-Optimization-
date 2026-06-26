@@ -1,0 +1,28 @@
+{
+    "track": "silverstone",
+    "source": "historical",
+    "fastest_compound": "HARD",
+    "degradation": {
+        "SOFT": {
+            "lap_5": 228.254,
+            "lap_10": 498.998,
+            "lap_15": 788.494,
+            "deg_rate": 56.024,
+            "cliff_age": 12
+        },
+        "MEDIUM": {
+            "lap_5": 227.272,
+            "lap_10": 497.84,
+            "lap_15": 787.581,
+            "deg_rate": 56.031,
+            "cliff_age": 20
+        },
+        "HARD": {
+            "lap_5": 127.121,
+            "lap_10": 199.707,
+            "lap_15": 260.106,
+            "deg_rate": 13.2985,
+            "cliff_age": 28
+        }
+    }
+}

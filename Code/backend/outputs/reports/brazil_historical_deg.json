@@ -1,0 +1,28 @@
+{
+    "track": "brazil",
+    "source": "historical",
+    "fastest_compound": "MEDIUM",
+    "degradation": {
+        "SOFT": {
+            "lap_5": 39.49,
+            "lap_10": 61.701,
+            "lap_15": 80.105,
+            "deg_rate": 4.0614,
+            "cliff_age": 12
+        },
+        "MEDIUM": {
+            "lap_5": 28.455,
+            "lap_10": 42.101,
+            "lap_15": 52.945,
+            "deg_rate": 2.449,
+            "cliff_age": 20
+        },
+        "HARD": {
+            "lap_5": 32.571,
+            "lap_10": 47.51,
+            "lap_15": 59.251,
+            "deg_rate": 2.668,
+            "cliff_age": 28
+        }
+    }
+}

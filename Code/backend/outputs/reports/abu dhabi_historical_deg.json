@@ -1,0 +1,28 @@
+{
+    "track": "abu dhabi",
+    "source": "historical",
+    "fastest_compound": "HARD",
+    "degradation": {
+        "SOFT": {
+            "lap_5": 0.738,
+            "lap_10": 0.839,
+            "lap_15": 0.904,
+            "deg_rate": 0.0166,
+            "cliff_age": 12
+        },
+        "MEDIUM": {
+            "lap_5": 5.412,
+            "lap_10": 6.072,
+            "lap_15": 6.494,
+            "deg_rate": 0.1083,
+            "cliff_age": 20
+        },
+        "HARD": {
+            "lap_5": 2.833,
+            "lap_10": 2.849,
+            "lap_15": 2.858,
+            "deg_rate": 0.0024,
+            "cliff_age": 28
+        }
+    }
+}

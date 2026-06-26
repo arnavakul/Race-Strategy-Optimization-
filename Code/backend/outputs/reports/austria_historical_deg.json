@@ -1,0 +1,28 @@
+{
+    "track": "austria",
+    "source": "historical",
+    "fastest_compound": "MEDIUM",
+    "degradation": {
+        "SOFT": {
+            "lap_5": 66.766,
+            "lap_10": 137.317,
+            "lap_15": 209.371,
+            "deg_rate": 14.2605,
+            "cliff_age": 12
+        },
+        "MEDIUM": {
+            "lap_5": 28.262,
+            "lap_10": 41.822,
+            "lap_15": 52.596,
+            "deg_rate": 2.4334,
+            "cliff_age": 20
+        },
+        "HARD": {
+            "lap_5": 639.418,
+            "lap_10": 2959.679,
+            "lap_15": 7252.928,
+            "deg_rate": 661.351,
+            "cliff_age": 28
+        }
+    }
+}

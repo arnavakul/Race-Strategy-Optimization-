@@ -1,0 +1,28 @@
+{
+    "track": "qatar",
+    "source": "historical",
+    "fastest_compound": "MEDIUM",
+    "degradation": {
+        "SOFT": {
+            "lap_5": 73.996,
+            "lap_10": 139.924,
+            "lap_15": 203.115,
+            "deg_rate": 12.9119,
+            "cliff_age": 12
+        },
+        "MEDIUM": {
+            "lap_5": 23.436,
+            "lap_10": 33.215,
+            "lap_15": 40.731,
+            "deg_rate": 1.7295,
+            "cliff_age": 20
+        },
+        "HARD": {
+            "lap_5": 159.201,
+            "lap_10": 378.395,
+            "lap_15": 627.901,
+            "deg_rate": 46.8701,
+            "cliff_age": 28
+        }
+    }
+}

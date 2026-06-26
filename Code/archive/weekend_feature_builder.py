@@ -2,19 +2,8 @@ import pandas as pd
 from api.models.weekend.practice_session_analyzer import (
     generate_practice_report
 )
-
+from api.config.weekend_config import *
 import os
-
-output_folder = (
-    r"C:\DevProjects\Race Strategy Optimization"
-    r"\Code\backend\data\weekend_datasets"
-    r"\Monaco"
-)
-
-os.makedirs(
-    output_folder,
-    exist_ok=True
-)
 
 def load_weekend_data(fp1_file,fp2_file,fp3_file,quali_file):
     fp1 = pd.read_parquet(
@@ -64,7 +53,8 @@ def build_weekend_dataset(
     fp1_df,
     fp2_df,
     fp3_df,
-    quali_df
+    quali_df,
+    track
 ):
     fp1_features = (
         extract_session_features(
@@ -133,6 +123,8 @@ def build_weekend_dataset(
         row = {
 
             "driver": driver,
+            
+            "track": track,
             
             "team": driver_team,
 
@@ -234,7 +226,11 @@ def build_weekend_dataset(
     return weekend_dataset
 
 
-def build_track_history(tracks,years,processed_path,output_path):
+def build_track_history(
+    tracks,
+    years
+):
+    
     
     for track in tracks:
         
@@ -244,28 +240,28 @@ def build_track_history(tracks,years,processed_path,output_path):
             )
             
             fp1_file = os.path.join(
-                processed_path,
+                PROCESSED_DIR,
                 "FP1",
                 "clean_laps",
                 f"{track.lower()}_{year}_FP1_clean.parquet"
             )
             
             fp2_file = os.path.join(
-                processed_path,
+                PROCESSED_DIR,
                 "FP2",
                 "clean_laps",
                 f"{track.lower()}_{year}_FP2_clean.parquet"
             )
 
             fp3_file = os.path.join(
-                processed_path,
+                PROCESSED_DIR,
                 "FP3",
                 "clean_laps",
                 f"{track.lower()}_{year}_FP3_clean.parquet"
             )
 
             quali_file = os.path.join(
-                processed_path,
+                PROCESSED_DIR,
                 "Q",
                 "clean_laps",
                 f"{track.lower()}_{year}_Q_clean.parquet"
@@ -287,21 +283,18 @@ def build_track_history(tracks,years,processed_path,output_path):
                         fp1_df,
                         fp2_df,
                         fp3_df,
-                        quali_df
+                        quali_df,
+                        track
                     )
                 )
                 
-                track_folder = os.path.join(
-                    output_path,
-                    track
-                )
-                
                 os.makedirs(
-                    track_folder,exist_ok=True
+                    WEEKEND_DATASET_DIR,
+                    exist_ok=True
                 )
-                
+
                 save_file = os.path.join(
-                    track_folder,
+                    WEEKEND_DATASET_DIR,
                     f"{track.lower()}_{year}_weekend.parquet"
                 )
                 
@@ -315,55 +308,23 @@ def build_track_history(tracks,years,processed_path,output_path):
                 )
 
             except Exception as e:
-
-                print(
-                    f"Failed {track} {year}"
-                )
-
+                
+                if not (
+                    os.path.exists(fp1_file)
+                    and os.path.exists(fp2_file)
+                    and os.path.exists(fp3_file)
+                    and os.path.exists(quali_file)
+                ):
+                    print(
+                        f"Skipping {track} {year} "
+                        f"(missing session files)"
+                    )
+                    continue
                 print(e)
 
 if __name__ == "__main__":
 
-    processed_path = (
-        r"C:\DevProjects\Race Strategy Optimization"
-        r"\Code\backend\data\processed"
-    )
-
-    output_path = (
-        r"C:\DevProjects\Race Strategy Optimization"
-        r"\Code\backend\data\weekend_datasets"
-    )
-
     build_track_history(
-        tracks=[
-            "Abu Dhabi",
-            "Austria",
-            "Bahrain",
-            "Barcelona",
-            "Brazil",
-            "COTA",
-            "Hungary",
-            "Jeddah",
-            "Melbourne",
-            "Monaco",
-            "Monza",
-            "Montreal",
-            "Qatar",
-            "Silverstone",
-            "Singapore",
-            "Spa",
-            "Suzuka",
-            "Monaco",
-            "Miami",
-            "Shanghai",
-            "Suzuka",
-            "Mexico City",
-            "Las Vegas",
-            "Baku",
-            "Zandvoort"
-        ],
-        years = [2022, 2023, 2024, 2025, 2026],
-        processed_path=processed_path,
-        output_path=output_path
+        TRACKS,
+        TRAIN_YEARS
     )
-

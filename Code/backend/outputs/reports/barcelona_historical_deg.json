@@ -1,0 +1,28 @@
+{
+    "track": "barcelona",
+    "source": "historical",
+    "fastest_compound": "HARD",
+    "degradation": {
+        "SOFT": {
+            "lap_5": 19.179,
+            "lap_10": 23.398,
+            "lap_15": 26.285,
+            "deg_rate": 0.7106,
+            "cliff_age": 12
+        },
+        "MEDIUM": {
+            "lap_5": 55.342,
+            "lap_10": 95.026,
+            "lap_15": 130.373,
+            "deg_rate": 7.5031,
+            "cliff_age": 20
+        },
+        "HARD": {
+            "lap_5": 1.063,
+            "lap_10": 1.354,
+            "lap_15": 1.559,
+            "deg_rate": 0.0497,
+            "cliff_age": 28
+        }
+    }
+}

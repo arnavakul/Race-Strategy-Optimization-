@@ -6,6 +6,21 @@ from api.models.weekend.practice_session_analyzer import (
 )
 
 
+BASE_DIR = os.path.dirname(
+    os.path.dirname(
+        os.path.dirname(
+            os.path.dirname(__file__)
+        )
+    )
+)
+
+
+PROCESSED_DIR = os.path.join(
+    BASE_DIR,
+    "data",
+    "processed"
+)
+
 def extract_session_features(session_df):
 
     features = {}
@@ -24,24 +39,27 @@ def extract_session_features(session_df):
     return features
 
 
-def build_prediction_dataset():
-
-    fp1_file = (
-        r"C:\DevProjects\Race Strategy Optimization"
-        r"\Code\backend\data\processed\FP1\clean_laps"
-        r"\monaco_2026_FP1_clean.parquet"
+def build_prediction_dataset(track,year):
+    
+    fp1_file = os.path.join(
+        PROCESSED_DIR,
+        "FP1",
+        "clean_laps",
+        f"{track.lower()}_{year}_FP1_clean.parquet"
     )
-
-    fp2_file = (
-        r"C:\DevProjects\Race Strategy Optimization"
-        r"\Code\backend\data\processed\FP2\clean_laps"
-        r"\monaco_2026_FP2_clean.parquet"
+    
+    fp2_file = os.path.join(
+        PROCESSED_DIR,
+        "FP2",
+        "clean_laps",
+        f"{track.lower()}_{year}_FP2_clean.parquet"
     )
-
-    fp3_file = (
-        r"C:\DevProjects\Race Strategy Optimization"
-        r"\Code\backend\data\processed\FP3\clean_laps"
-        r"\monaco_2026_FP3_clean.parquet"
+        
+    fp3_file = os.path.join(
+        PROCESSED_DIR,
+        "FP3",
+        "clean_laps",
+        f"{track.lower()}_{year}_FP3_clean.parquet"
     )
 
     fp1_df = pd.read_parquet(
@@ -215,39 +233,35 @@ def build_prediction_dataset():
         rows
     )
 
-
 if __name__ == "__main__":
 
-    prediction_df = (
-        build_prediction_dataset()
-    )
+    TRACK = ["Abu Dhabi",
+            "Austria",
+            "Bahrain",
+            "Barcelona",
+            "Brazil",
+            "COTA",
+            "Hungary",
+            "Jeddah",
+            "Melbourne",
+            "Monaco",
+            "Monza",
+            "Montreal",
+            "Qatar",
+            "Silverstone",
+            "Singapore",
+            "Spa",
+            "Suzuka",
+            "Miami",
+            "Shanghai",
+            "Mexico City",
+            "Las Vegas",
+            "Baku",
+            "Zandvoort"]
+    
+    YEAR = [2026]
 
-    print(
-        prediction_df.head()
-    )
-
-    print(
-        prediction_df.shape
-    )
-
-    save_folder = (
-        r"C:\DevProjects\Race Strategy Optimization"
-        r"\Code\backend\data\prediction_datasets"
-    )
-
-    os.makedirs(
-        save_folder,
-        exist_ok=True
-    )
-
-    prediction_df.to_parquet(
-        os.path.join(
-            save_folder,
-            "monaco_2026_prediction_dataset.parquet"
-        ),
-        index=False
-    )
-
-    print(
-        "\nPrediction dataset saved."
+    build_prediction_dataset(
+        TRACK,
+        YEAR
     )

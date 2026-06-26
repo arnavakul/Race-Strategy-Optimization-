@@ -1,0 +1,21 @@
+{
+    "track": "jeddah",
+    "source": "historical",
+    "fastest_compound": "HARD",
+    "degradation": {
+        "MEDIUM": {
+            "lap_5": 8.715,
+            "lap_10": 10.539,
+            "lap_15": 11.778,
+            "deg_rate": 0.3064,
+            "cliff_age": 20
+        },
+        "HARD": {
+            "lap_5": 2.297,
+            "lap_10": 2.306,
+            "lap_15": 2.311,
+            "deg_rate": 0.0014,
+            "cliff_age": 28
+        }
+    }
+}

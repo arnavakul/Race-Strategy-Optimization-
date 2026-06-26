@@ -1,13 +1,21 @@
 import os
 import pandas as pd
 
+BASE_DIR = os.path.dirname(
+    os.path.dirname(
+        os.path.dirname(
+            os.path.dirname(__file__)
+        )
+    )
+)
 
-def load_weekend_data():
+def load_weekend_data(track):
 
-    folder = (
-        r"C:\DevProjects\Race Strategy Optimization"
-        r"\Code\backend\data\weekend_datasets"
-        r"\Monaco"
+    folder = os.path.join(
+        BASE_DIR,
+        "data",
+        "weekend_datasets",
+        track
     )
 
     datasets = []
@@ -23,8 +31,16 @@ def load_weekend_data():
 
         file_path = os.path.join(
             folder,
-            f"monaco_{year}_weekend.parquet"
+            f"{track.lower()}_{year}_weekend.parquet"
         )
+
+        if not os.path.exists(file_path):
+
+            print(
+                f"Missing: {file_path}"
+            )
+
+            continue
 
         df = pd.read_parquet(
             file_path
@@ -38,7 +54,6 @@ def load_weekend_data():
         datasets,
         ignore_index=True
     )
-
 
 def load_driver_ratings():
 
@@ -66,10 +81,10 @@ def load_team_strength():
     )
 
 
-def build_qualifying_dataset():
+def build_qualifying_dataset(track):
 
     weekend_df = (
-        load_weekend_data()
+        load_weekend_data(track)
     )
 
     driver_ratings = (
@@ -83,7 +98,7 @@ def build_qualifying_dataset():
     driver_ratings = (
         driver_ratings[
             driver_ratings["Track"]
-            == "Monaco"
+            == track
         ]
     )
 
@@ -134,67 +149,42 @@ def build_qualifying_dataset():
 
     merged_df[
         "driver_track_rating"
-    ] = (
+    ] = merged_df[
+        "driver_track_rating"
+    ].fillna(
         merged_df[
             "driver_track_rating"
-        ].fillna(
-            merged_df[
-                "driver_track_rating"
-            ].mean()
-        )
+        ].mean()
     )
 
     merged_df[
         "team_quali_strength"
-    ] = (
+    ] = merged_df[
+        "team_quali_strength"
+    ].fillna(
         merged_df[
             "team_quali_strength"
-        ].fillna(
-            merged_df[
-                "team_quali_strength"
-            ].mean()
-        )
+        ].mean()
     )
 
     merged_df[
         "team_race_strength"
-    ] = (
+    ] = merged_df[
+        "team_race_strength"
+    ].fillna(
         merged_df[
             "team_race_strength"
-        ].fillna(
-            merged_df[
-                "team_race_strength"
-            ].mean()
-        )
+        ].mean()
     )
 
     merged_df[
         "team_combined_strength"
-    ] = (
+    ] = merged_df[
+        "team_combined_strength"
+    ].fillna(
         merged_df[
             "team_combined_strength"
-        ].fillna(
-            merged_df[
-                "team_combined_strength"
-            ].mean()
-        )
-    )
-
-    print(
-        "\nMISSING VALUES\n"
-    )
-
-    print(
-        merged_df[
-            [
-                "driver_track_rating",
-                "team_quali_strength",
-                "team_race_strength",
-                "team_combined_strength"
-            ]
-        ]
-        .isna()
-        .sum()
+        ].mean()
     )
 
     return merged_df
@@ -202,13 +192,18 @@ def build_qualifying_dataset():
 
 if __name__ == "__main__":
 
+    TRACK = "Monaco"
+
     qualifying_dataset = (
-        build_qualifying_dataset()
+        build_qualifying_dataset(
+            TRACK
+        )
     )
 
-    save_folder = (
-        r"C:\DevProjects\Race Strategy Optimization"
-        r"\Code\backend\data\qualifying_datasets"
+    save_folder = os.path.join(
+        BASE_DIR,
+        "data",
+        "qualifying_datasets"
     )
 
     os.makedirs(
@@ -216,34 +211,31 @@ if __name__ == "__main__":
         exist_ok=True
     )
 
+    parquet_file = os.path.join(
+        save_folder,
+        f"{TRACK.lower()}_qualifying_training_dataset.parquet"
+    )
+
+    csv_file = os.path.join(
+        save_folder,
+        f"{TRACK.lower()}_qualifying_training_dataset.csv"
+    )
+
     qualifying_dataset.to_parquet(
-        os.path.join(
-            save_folder,
-            "qualifying_training_dataset.parquet"
-        ),
+        parquet_file,
         index=False
     )
 
     qualifying_dataset.to_csv(
-        os.path.join(
-            save_folder,
-            "qualifying_training_dataset.csv"
-        ),
+        csv_file,
         index=False
     )
 
     print(
-        qualifying_dataset.head()
+        f"\nDataset Shape: "
+        f"{qualifying_dataset.shape}"
     )
 
     print(
-        qualifying_dataset.columns
-    )
-
-    print(
-        qualifying_dataset.shape
-    )
-
-    print(
-        "\nSaved qualifying training dataset."
+        f"\nSaved:\n{parquet_file}"
     )

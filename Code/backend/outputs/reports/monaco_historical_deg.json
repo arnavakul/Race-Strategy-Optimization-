@@ -1,0 +1,28 @@
+{
+    "track": "monaco",
+    "source": "historical",
+    "fastest_compound": "HARD",
+    "degradation": {
+        "SOFT": {
+            "lap_5": 3.155,
+            "lap_10": 3.238,
+            "lap_15": 3.288,
+            "deg_rate": 0.0133,
+            "cliff_age": 12
+        },
+        "MEDIUM": {
+            "lap_5": 10.216,
+            "lap_10": 11.752,
+            "lap_15": 12.755,
+            "deg_rate": 0.2539,
+            "cliff_age": 20
+        },
+        "HARD": {
+            "lap_5": 4.519,
+            "lap_10": 4.529,
+            "lap_15": 4.534,
+            "deg_rate": 0.0016,
+            "cliff_age": 28
+        }
+    }
+}

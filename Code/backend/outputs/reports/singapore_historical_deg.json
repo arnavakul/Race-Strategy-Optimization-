@@ -1,0 +1,28 @@
+{
+    "track": "singapore",
+    "source": "historical",
+    "fastest_compound": "HARD",
+    "degradation": {
+        "SOFT": {
+            "lap_5": 3.93,
+            "lap_10": 4.246,
+            "lap_15": 4.442,
+            "deg_rate": 0.0512,
+            "cliff_age": 12
+        },
+        "MEDIUM": {
+            "lap_5": 5.699,
+            "lap_10": 6.468,
+            "lap_15": 6.965,
+            "deg_rate": 0.1267,
+            "cliff_age": 20
+        },
+        "HARD": {
+            "lap_5": 1.683,
+            "lap_10": 1.917,
+            "lap_15": 2.068,
+            "deg_rate": 0.0385,
+            "cliff_age": 28
+        }
+    }
+}

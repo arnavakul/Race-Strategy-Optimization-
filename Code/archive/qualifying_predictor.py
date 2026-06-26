@@ -94,12 +94,10 @@ def train_model(
 
     return model
 
-def load_prediction_data():
+def load_prediction_data(track,year):
 
     prediction_file = (
-        r"C:\DevProjects\Race Strategy Optimization"
-        r"\Code\backend\data\prediction_datasets"
-        r"\monaco_2026_prediction_dataset.parquet"
+        f"{track.lower()}_{year}_prediction_dataset.parquet"
     )
 
     prediction_df = pd.read_parquet(
@@ -113,7 +111,7 @@ def load_prediction_data():
     )
 
     ratings_df = ratings_df[
-        ratings_df["Track"] == "Monaco"
+        ratings_df["Track"] == track
     ]
 
     team_strength_df = pd.read_parquet(
@@ -263,6 +261,26 @@ def build_weekend_grid_prediction(
 
     return prediction_df
 
+def run_qualifying_prediction(
+    track,
+    year
+):
+
+    prediction_df = (
+        load_prediction_data(
+            track,
+            year
+        )
+    )
+
+    predicted_grid = (
+        build_weekend_grid_prediction(
+            prediction_df
+        )
+    )
+
+    return predicted_grid
+
 if __name__ == "__main__":
 
     training_df = (
@@ -361,55 +379,82 @@ if __name__ == "__main__":
     "\nMONACO 2026 QUALIFYING PREDICTION\n"
     )
 
-prediction_df = (
-    load_prediction_data()
-)
+    TRACK = "Monaco"
+    YEAR = 2026
 
-predicted_grid = (
-    build_weekend_grid_prediction(
-        prediction_df
+    prediction_df = (
+        load_prediction_data(
+            TRACK,
+            YEAR
+        )
     )
-)
 
-fastest_fp3 = (
+    predicted_grid = (
+        build_weekend_grid_prediction(
+            prediction_df
+        )
+    )
+
+    fastest_fp3 = (
+        predicted_grid[
+            "fp3_best_lap"
+        ].min()
+    )
+
     predicted_grid[
-        "fp3_best_lap"
-    ].min()
-)
-
-predicted_grid[
-    "PredictedLapTime"
-] = (
-    fastest_fp3
-    +
-    (
-        predicted_grid[
-            "QualifyingScore"
-        ].max()
-        -
-        predicted_grid[
-            "QualifyingScore"
-        ]
-    ) * 0.03
-)
-
-predicted_grid = (
-    predicted_grid
-    .sort_values(
         "PredictedLapTime"
+    ] = (
+        fastest_fp3
+        +
+        (
+            predicted_grid[
+                "QualifyingScore"
+            ].max()
+            -
+            predicted_grid[
+                "QualifyingScore"
+            ]
+        ) * 0.03
     )
-    .reset_index(
-        drop=True
+
+    predicted_grid = (
+        predicted_grid
+        .sort_values(
+            "PredictedLapTime"
+        )
+        .reset_index(
+            drop=True
+        )
     )
-)
 
-predicted_grid[
-    "PredictedGridPosition"
-] = (
-    predicted_grid.index + 1
-)
+    predicted_grid[
+        "PredictedGridPosition"
+    ] = (
+        predicted_grid.index + 1
+    )
 
-print(
+    print(
+        predicted_grid[
+            [
+                "PredictedGridPosition",
+                "driver",
+                "team",
+                "PredictedLapTime",
+                "QualifyingScore"
+            ]
+        ]
+    )
+
+    save_folder = (
+        r"C:\DevProjects\Race Strategy Optimization"
+        r"\Code\backend\data\predictions"
+    )
+
+    os.makedirs(
+        save_folder,
+        exist_ok=True
+    )
+
     predicted_grid[
         [
             "PredictedGridPosition",
@@ -418,35 +463,15 @@ print(
             "PredictedLapTime",
             "QualifyingScore"
         ]
-    ]
-)
+    ].to_csv(
+        os.path.join(
+            save_folder,
+            f"{TRACK.lower()}_{YEAR}_predicted_grid.csv"
+        ),
+        index=False
+    )
 
-save_folder = (
-    r"C:\DevProjects\Race Strategy Optimization"
-    r"\Code\backend\data\predictions"
-)
-
-os.makedirs(
-    save_folder,
-    exist_ok=True
-)
-
-predicted_grid[
-    [
-        "PredictedGridPosition",
-        "driver",
-        "team",
-        "PredictedLapTime",
-        "QualifyingScore"
-    ]
-].to_csv(
-    os.path.join(
-        save_folder,
-        "monaco_2026_predicted_grid.csv"
-    ),
-    index=False
-)
-
-print(
-    "\nSaved -> monaco_2026_predicted_grid.csv"
-)
+    print(
+        f"\nSaved -> "
+        f"{TRACK.lower()}_{YEAR}_predicted_grid.csv"
+    )

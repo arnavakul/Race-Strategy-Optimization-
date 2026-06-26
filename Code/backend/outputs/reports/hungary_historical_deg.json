@@ -1,0 +1,28 @@
+{
+    "track": "hungary",
+    "source": "historical",
+    "fastest_compound": "SOFT",
+    "degradation": {
+        "SOFT": {
+            "lap_5": 2.302,
+            "lap_10": 2.335,
+            "lap_15": 2.354,
+            "deg_rate": 0.0052,
+            "cliff_age": 12
+        },
+        "MEDIUM": {
+            "lap_5": 3.498,
+            "lap_10": 3.548,
+            "lap_15": 3.577,
+            "deg_rate": 0.0079,
+            "cliff_age": 20
+        },
+        "HARD": {
+            "lap_5": 2.244,
+            "lap_10": 2.374,
+            "lap_15": 2.454,
+            "deg_rate": 0.0211,
+            "cliff_age": 28
+        }
+    }
+}

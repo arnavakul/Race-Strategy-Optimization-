@@ -1,0 +1,28 @@
+{
+    "track": "suzuka",
+    "source": "historical",
+    "fastest_compound": "MEDIUM",
+    "degradation": {
+        "SOFT": {
+            "lap_5": 6.003,
+            "lap_10": 7.117,
+            "lap_15": 7.862,
+            "deg_rate": 0.1859,
+            "cliff_age": 12
+        },
+        "MEDIUM": {
+            "lap_5": 4.343,
+            "lap_10": 4.749,
+            "lap_15": 5.004,
+            "deg_rate": 0.0662,
+            "cliff_age": 20
+        },
+        "HARD": {
+            "lap_5": 6.356,
+            "lap_10": 7.848,
+            "lap_15": 8.878,
+            "deg_rate": 0.2523,
+            "cliff_age": 28
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "track": "cota",
+    "source": "historical",
+    "fastest_compound": "HARD",
+    "degradation": {
+        "MEDIUM": {
+            "lap_5": 3.068,
+            "lap_10": 3.681,
+            "lap_15": 4.094,
+            "deg_rate": 0.1026,
+            "cliff_age": 20
+        },
+        "HARD": {
+            "lap_5": 4.196,
+            "lap_10": 4.415,
+            "lap_15": 4.549,
+            "deg_rate": 0.0353,
+            "cliff_age": 28
+        }
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "track": "bahrain",
+    "source": "historical",
+    "fastest_compound": "MEDIUM",
+    "degradation": {
+        "SOFT": {
+            "lap_5": 21.234,
+            "lap_10": 29.422,
+            "lap_15": 35.606,
+            "deg_rate": 1.4372,
+            "cliff_age": 12
+        },
+        "MEDIUM": {
+            "lap_5": 5.34,
+            "lap_10": 5.704,
+            "lap_15": 5.929,
+            "deg_rate": 0.0589,
+            "cliff_age": 20
+        },
+        "HARD": {
+            "lap_5": 6.518,
+            "lap_10": 7.733,
+            "lap_15": 8.546,
+            "deg_rate": 0.2028,
+            "cliff_age": 28
+        }
+    }
+}

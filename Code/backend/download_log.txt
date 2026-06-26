@@ -338,3 +338,7 @@ Canada,2026,FP1
 Canada,2026,Q
 Canada,2026,R
 Monaco,2026,FP1
+Barcelona,2026,FP1
+Barcelona,2026,FP2
+Barcelona,2026,FP3
+Barcelona,2026,Q

@@ -1,0 +1,21 @@
+{
+    "track": "melbourne",
+    "source": "historical",
+    "fastest_compound": "MEDIUM",
+    "degradation": {
+        "MEDIUM": {
+            "lap_5": 64.876,
+            "lap_10": 78.726,
+            "lap_15": 88.161,
+            "deg_rate": 2.3285,
+            "cliff_age": 20
+        },
+        "HARD": {
+            "lap_5": 85.961,
+            "lap_10": 105.509,
+            "lap_15": 118.945,
+            "deg_rate": 3.2985,
+            "cliff_age": 28
+        }
+    }
+}

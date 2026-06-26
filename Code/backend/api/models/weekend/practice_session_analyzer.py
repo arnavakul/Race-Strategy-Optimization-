@@ -35,11 +35,17 @@ def calculate_representative_pace(
         session_df["Driver"] == driver
     ]
 
+
     valid_laps = driver_laps[
         (driver_laps["TrackStatus"] == "1")
         &
         (driver_laps["IsAccurate"] == True)
     ].copy()
+    
+    print(
+        f"{driver}: "
+        f"filtered={len(valid_laps)}"
+    )
 
     if valid_laps.empty:
         return None
@@ -95,7 +101,7 @@ def calculate_representative_pace(
         "FuelCorrectedLapTime"
     ].mean()
 
-def calculate_degradation_rate(
+def calculate_tyre_management(
     session_df,
     driver
 ):
@@ -105,56 +111,25 @@ def calculate_degradation_rate(
     ]
 
     driver_laps = driver_laps[
-        (driver_laps["TrackStatus"] == "1")
-        &
-        (driver_laps["IsAccurate"] == True)
+        driver_laps["IsAccurate"] == True
     ]
 
-    if driver_laps.empty:
+    if len(driver_laps) < 5:
         return None
 
-    degradation_values = []
-
-    for _, stint_df in driver_laps.groupby(
-        "Stint"
-    ):
-
-        if len(stint_df) < 2:
-            continue
-
-        stint_df = stint_df.sort_values(
-            "LapNumber"
-        )
-
-        first_lap = stint_df[
+    fastest = (
+        driver_laps[
             "FuelCorrectedLapTime"
-        ].iloc[0]
-
-        last_lap = stint_df[
-            "FuelCorrectedLapTime"
-        ].iloc[-1]
-
-        slope, _, _, _, _ = linregress(
-                stint_df["TyreLife"],
-                stint_df["FuelCorrectedLapTime"]
-            )
-
-        degradation_values.append(
-                slope
-            )
-
-    if len(
-        degradation_values
-    ) == 0:
-
-        return None
-
-    return sum(
-        degradation_values
-    ) / len(
-        degradation_values
+        ].min()
     )
 
+    average = (
+        driver_laps[
+            "FuelCorrectedLapTime"
+        ].mean()
+    )
+
+    return average - fastest
 
 def calculate_consistency(
     session_df,
@@ -193,7 +168,12 @@ def calculate_consistency(
     if len(laps) < 2:
         return None
 
-    return laps.std()
+    std = laps.std()
+
+    if pd.isna(std):
+        return 10.0
+
+    return std
 
 
 def generate_practice_report(
@@ -214,7 +194,7 @@ def generate_practice_report(
     )
 
     degradation = (
-        calculate_degradation_rate(
+        calculate_tyre_management(
             session_df,
             driver
         )
@@ -248,7 +228,7 @@ def generate_practice_report(
                 3
             ),
 
-        "degradation_rate":
+        "tyre_management":
             None
             if degradation is None
             else round(
@@ -306,45 +286,3 @@ def analyze_all_drivers(
     )
 
     return quali_rankings, race_rankings
-
-if __name__ == "__main__":
-
-    file_path = (
-        r"C:\DevProjects\Race Strategy Optimization"
-        r"\Code\backend\data\processed"
-        r"\FP1\clean_laps"
-        r"\monaco_2026_FP1_clean.parquet"
-    )
-
-    df = load_practice_data(
-        file_path
-    )
-    
-    print(
-        df.groupby(
-            "Driver",
-            observed=False
-        )[
-            "LapTimeSeconds"
-        ].min().sort_values()
-    )
-    
-    quali_rankings, race_rankings = (
-        analyze_all_drivers(df)
-    )
-
-    print(
-        "\nQUALIFYING PACE RANKINGS\n"
-    )
-
-    print(
-        quali_rankings
-    )
-
-    print(
-        "\nTOP 10 LONG RUN PACE\n"
-    )
-
-    print(
-        race_rankings.head(10)
-    )
