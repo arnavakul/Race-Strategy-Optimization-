@@ -2,6 +2,23 @@ import pandas as pd
 from scipy.stats import linregress
 
 
+def load_weekend_data(
+    fp1_file,
+    fp2_file,
+    fp3_file
+):
+
+    fp1 = pd.read_parquet(fp1_file)
+
+    fp2 = pd.read_parquet(fp2_file)
+
+    fp3 = pd.read_parquet(fp3_file)
+
+    return pd.concat(
+        [fp1, fp2, fp3],
+        ignore_index=True
+    )
+
 def load_practice_data(file_path):
 
     return pd.read_parquet(
@@ -286,3 +303,24 @@ def analyze_all_drivers(
     )
 
     return quali_rankings, race_rankings
+
+
+if __name__ == "__main__":
+
+    weekend_df = load_weekend_data(
+
+        r"data\processed\FP1\clean_laps\austria_2026_FP1_clean.parquet",
+
+        r"data\processed\FP2\clean_laps\austria_2026_FP2_clean.parquet",
+
+        r"data\processed\FP3\clean_laps\austria_2026_FP3_clean.parquet"
+
+    )
+
+    quali, race = analyze_all_drivers(weekend_df)
+
+    print("\n========== QUALIFYING RANKING ==========\n")
+    print(quali)
+
+    print("\n========== LONG RUN RANKING ==========\n")
+    print(race)

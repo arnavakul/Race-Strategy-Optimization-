@@ -37,21 +37,39 @@ def should_pit_for_weather(
 
 
 def get_recommended_compound(
-    weather_state
+    weather_state,
+    laps_remaining=None
 ):
+    """
+    Returns the recommended tyre compound based on weather.
+    laps_remaining is currently unused but is accepted so future
+    strategy logic can choose Soft/Medium/Hard based on race distance.
+    """
 
-    # Full Wet Conditions
+    # Full wet
     if weather_state == "WET":
-
         return "WET"
 
-    # Crossover Conditions
-    elif weather_state == "MIXED":
-
+    # Intermediate conditions
+    if weather_state == "MIXED":
         return "INTERMEDIATE"
 
-    # Dry Conditions
-    return None
+    # Dry conditions
+    if weather_state == "DRY":
+
+        if laps_remaining is None:
+            return "MEDIUM"
+
+        if laps_remaining <= 12:
+            return "SOFT"
+
+        elif laps_remaining <= 30:
+            return "MEDIUM"
+
+        else:
+            return "HARD"
+
+    return "MEDIUM"
 
 
 # TESTING

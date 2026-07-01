@@ -1,0 +1,391 @@
+{
+    "race_context": {
+        "track": "barcelona",
+        "total_laps": 66,
+        "team_strength": [
+            {
+                "team": "Ferrari",
+                "best_lap": 76.09,
+                "long_run_pace": 76.6685,
+                "tyre_management": 12.588000000000001,
+                "consistency": 2.773,
+                "quali_score": 83.17496515900162,
+                "race_score": 100.0,
+                "tyre_management_score": 34.02989873010767,
+                "consistency_score": 82.65089461188572,
+                "team_strength": 80.8648104969605
+            },
+            {
+                "team": "Racing Bulls",
+                "best_lap": 76.411,
+                "long_run_pace": 77.335,
+                "tyre_management": 9.834,
+                "consistency": 2.989,
+                "quali_score": 75.04117572532626,
+                "race_score": 79.44170265268357,
+                "tyre_management_score": 78.29930879279858,
+                "consistency_score": 80.84448016800397,
+                "team_strength": 78.25336990039928
+            },
+            {
+                "team": "Audi",
+                "best_lap": 76.77250000000001,
+                "long_run_pace": 77.6055,
+                "tyre_management": 8.484,
+                "consistency": 2.4795,
+                "quali_score": 65.88116052198136,
+                "race_score": 71.09808760024644,
+                "tyre_management_score": 100.0,
+                "consistency_score": 85.10544386780838,
+                "team_strength": 76.97497393738708
+            },
+            {
+                "team": "McLaren",
+                "best_lap": 75.426,
+                "long_run_pace": 77.324,
+                "tyre_management": 12.831,
+                "consistency": 5.244,
+                "quali_score": 100.0,
+                "race_score": 79.78099938309677,
+                "tyre_management_score": 30.123774312811435,
+                "consistency_score": 61.985847895071856,
+                "team_strength": 73.12478937446302
+            },
+            {
+                "team": "Red Bull Racing",
+                "best_lap": 76.4975,
+                "long_run_pace": 77.958,
+                "tyre_management": 10.6645,
+                "consistency": 0.6985,
+                "quali_score": 72.8493601925757,
+                "race_score": 60.22516964836514,
+                "tyre_management_score": 64.94936505384985,
+                "consistency_score": 100.0,
+                "team_strength": 68.3035394006782
+            },
+            {
+                "team": "Alpine",
+                "best_lap": 77.1555,
+                "long_run_pace": 77.93,
+                "tyre_management": 10.6205,
+                "consistency": 7.475,
+                "quali_score": 56.17635879893573,
+                "race_score": 61.08883405305334,
+                "tyre_management_score": 65.65664684134383,
+                "consistency_score": 43.32792833812659,
+                "team_strength": 58.998187225689364
+            },
+            {
+                "team": "Mercedes",
+                "best_lap": 75.725,
+                "long_run_pace": 79.332,
+                "tyre_management": 10.024000000000001,
+                "consistency": 1.7915,
+                "quali_score": 92.42366653997232,
+                "race_score": 17.84392350401001,
+                "tyre_management_score": 75.24513743771097,
+                "consistency_score": 90.85920839276505,
+                "team_strength": 55.27063053861628
+            },
+            {
+                "team": "Haas F1 Team",
+                "best_lap": 77.2415,
+                "long_run_pace": 78.6115,
+                "tyre_management": 12.7055,
+                "consistency": 2.4274999999999998,
+                "quali_score": 53.997212720131756,
+                "race_score": 40.06785934608237,
+                "tyre_management_score": 32.141134865777175,
+                "consistency_score": 85.54032141911323,
+                "team_strength": 46.51209900083676
+            },
+            {
+                "team": "Cadillac",
+                "best_lap": 78.691,
+                "long_run_pace": 79.905,
+                "tyre_management": 10.147,
+                "consistency": 2.155,
+                "quali_score": 17.268465729127065,
+                "race_score": 0.16964836520659568,
+                "tyre_management_score": 73.26796334994373,
+                "consistency_score": 87.81924704854738,
+                "team_strength": 27.82897557146822
+            },
+            {
+                "team": "Williams",
+                "best_lap": 77.71600000000001,
+                "long_run_pace": 79.4005,
+                "tyre_management": 14.704999999999998,
+                "consistency": 8.900500000000001,
+                "quali_score": 41.97390092486998,
+                "race_score": 15.7310302282543,
+                "tyre_management_score": 0.0,
+                "consistency_score": 31.406429311490324,
+                "team_strength": 20.71308176508096
+            },
+            {
+                "team": "",
+                "best_lap": 77.81666666666666,
+                "long_run_pace": 79.72077777777777,
+                "tyre_management": 14.332222222222223,
+                "consistency": 12.655888888888889,
+                "quali_score": 39.42311753030126,
+                "race_score": 5.852011789704794,
+                "tyre_management_score": 5.992248477379452,
+                "consistency_score": 0.0,
+                "team_strength": 13.687634383418363
+            },
+            {
+                "team": "Aston Martin",
+                "best_lap": 79.3725,
+                "long_run_pace": 79.9105,
+                "tyre_management": 14.1425,
+                "consistency": 9.834,
+                "quali_score": 0.0,
+                "race_score": 0.0,
+                "tyre_management_score": 9.04195466966723,
+                "consistency_score": 23.599540962584733,
+                "team_strength": 4.16834503019192
+            }
+        ],
+        "historical_degradation": {
+            "track": "barcelona",
+            "source": "historical",
+            "fastest_compound": "HARD",
+            "degradation": {
+                "SOFT": {
+                    "lap_5": 19.179,
+                    "lap_10": 23.398,
+                    "lap_15": 26.285,
+                    "deg_rate": 0.7106,
+                    "cliff_age": 12
+                },
+                "MEDIUM": {
+                    "lap_5": 55.342,
+                    "lap_10": 95.026,
+                    "lap_15": 130.373,
+                    "deg_rate": 7.5031,
+                    "cliff_age": 20
+                },
+                "HARD": {
+                    "lap_5": 1.063,
+                    "lap_10": 1.354,
+                    "lap_15": 1.559,
+                    "deg_rate": 0.0497,
+                    "cliff_age": 28
+                }
+            }
+        },
+        "live_degradation": {
+            "SOFT": {
+                "degradation": 0.0288,
+                "stints": 2,
+                "confidence": "LOW",
+                "mean": 0.0288,
+                "min": 0.0232,
+                "max": 0.0345
+            },
+            "MEDIUM": {
+                "degradation": 0.1406,
+                "stints": 1,
+                "confidence": "LOW",
+                "mean": 0.1406,
+                "min": 0.1406,
+                "max": 0.1406
+            },
+            "HARD": {
+                "degradation": null,
+                "stints": 0
+            }
+        },
+        "weekend_tyre_model": {
+            "SOFT": {
+                "historical": 0.7106,
+                "live": 0.0288,
+                "weekend": 0.2333
+            },
+            "MEDIUM": {
+                "historical": 7.5031,
+                "live": 0.1406,
+                "weekend": 2.3493
+            },
+            "HARD": {
+                "historical": 0.0496,
+                "live": 0.0496,
+                "weekend": 0.0496
+            }
+        },
+        "track_characteristics": {
+            "compound_pace_delta": {
+                "SOFT": 0.6722349420270888,
+                "MEDIUM": 0.7852915339758368,
+                "HARD": 0.0,
+                "INTERMEDIATE": 4.0,
+                "WET": 7.0
+            },
+            "compound_deg": {
+                "SOFT": -0.0559406882919668,
+                "MEDIUM": -0.12140401679564132,
+                "HARD": -0.12002359982881373,
+                "INTERMEDIATE": 0.09,
+                "WET": 0.11
+            },
+            "cliff_age": {
+                "SOFT": 12,
+                "MEDIUM": 22,
+                "HARD": 30,
+                "INTERMEDIATE": 18,
+                "WET": 15
+            },
+            "cliff_multiplier": {
+                "SOFT": 0.08,
+                "MEDIUM": 0.05,
+                "HARD": 0.03,
+                "INTERMEDIATE": 0.06,
+                "WET": 0.09
+            },
+            "warmup_penalty": {
+                "SOFT": 0.5,
+                "MEDIUM": 0.8,
+                "HARD": 1.2,
+                "INTERMEDIATE": 0.7,
+                "WET": 1.2
+            }
+        }
+    },
+    "strategy": [
+        {
+            "average_time": 5504.635296227632,
+            "std_dev": 140.31419676718562,
+            "strategy_score": 5574.792394611225,
+            "strategy": [
+                [
+                    "SOFT",
+                    10
+                ],
+                [
+                    "SOFT",
+                    16
+                ],
+                [
+                    "HARD",
+                    40
+                ]
+            ],
+            "strategy_type": "2-stop",
+            "total_time": 5521.94868366346,
+            "average_lap_time": 83.66588914641605,
+            "pitstops": 6,
+            "stint_count": 3,
+            "compounds_used": [
+                "SOFT",
+                "HARD"
+            ],
+            "total_laps": 66
+        },
+        {
+            "average_time": 5575.097335031398,
+            "std_dev": 108.0660363169044,
+            "strategy_score": 5629.13035318985,
+            "strategy": [
+                [
+                    "MEDIUM",
+                    30
+                ],
+                [
+                    "HARD",
+                    36
+                ]
+            ],
+            "strategy_type": "1-stop",
+            "total_time": 5863.428526952601,
+            "average_lap_time": 88.8398261659485,
+            "pitstops": 4,
+            "stint_count": 2,
+            "compounds_used": [
+                "MEDIUM",
+                "HARD"
+            ],
+            "total_laps": 66
+        },
+        {
+            "average_time": 5619.356934030811,
+            "std_dev": 144.2198534625662,
+            "strategy_score": 5691.466860762094,
+            "strategy": [
+                [
+                    "MEDIUM",
+                    27
+                ],
+                [
+                    "HARD",
+                    39
+                ]
+            ],
+            "strategy_type": "1-stop",
+            "total_time": 5496.287299933764,
+            "average_lap_time": 83.27708030202673,
+            "pitstops": 2,
+            "stint_count": 2,
+            "compounds_used": [
+                "MEDIUM",
+                "HARD"
+            ],
+            "total_laps": 66
+        },
+        {
+            "average_time": 5672.682413188504,
+            "std_dev": 46.01535709197387,
+            "strategy_score": 5695.690091734491,
+            "strategy": [
+                [
+                    "HARD",
+                    38
+                ],
+                [
+                    "MEDIUM",
+                    28
+                ]
+            ],
+            "strategy_type": "1-stop",
+            "total_time": 5649.718348281144,
+            "average_lap_time": 85.60179315577491,
+            "pitstops": 2,
+            "stint_count": 2,
+            "compounds_used": [
+                "MEDIUM",
+                "HARD"
+            ],
+            "total_laps": 66
+        },
+        {
+            "average_time": 5721.683693727463,
+            "std_dev": 35.3459728118558,
+            "strategy_score": 5739.356680133391,
+            "strategy": [
+                [
+                    "SOFT",
+                    19
+                ],
+                [
+                    "SOFT",
+                    19
+                ],
+                [
+                    "MEDIUM",
+                    28
+                ]
+            ],
+            "strategy_type": "2-stop",
+            "total_time": 5694.458689120604,
+            "average_lap_time": 86.27967710788793,
+            "pitstops": 4,
+            "stint_count": 3,
+            "compounds_used": [
+                "MEDIUM",
+                "SOFT"
+            ],
+            "total_laps": 66
+        }
+    ]
+}

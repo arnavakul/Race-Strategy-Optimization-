@@ -2,7 +2,7 @@ from api.models.simulation.race_constraints import(
     validate_strategy
 )
 
-COMPOUNDS = ["SOFT", "MEDIUM", "HARD","INTERMEDIATE","WET"]
+# COMPOUNDS = ["SOFT", "MEDIUM", "HARD","INTERMEDIATE","WET"]
 
 DRY_COMPOUNDS = ["SOFT", "MEDIUM", "HARD"]
 
@@ -10,22 +10,24 @@ MIN_STINT = {
     "SOFT": 10,
     "MEDIUM": 15,
     "HARD": 20,
-    "INTERMEDIATE":5,
-    "WET":3
+    # "INTERMEDIATE":5,
+    # "WET":3
 }
 
 MAX_STINT = {
     "SOFT": 20,
     "MEDIUM": 30,
     "HARD": 40,
-    "INTERMEDIATE":25,
-    "WET":20
+    # "INTERMEDIATE":25,
+    # "WET":20
 }
 
 
 def generate_strategies(total_laps):
 
     strategies = []
+    
+    strategy_set = set()
 
     # 1-stop
 
@@ -58,11 +60,22 @@ def generate_strategies(total_laps):
                     (compound2, stint2_laps)
                 ]
                 
-                if validate_strategy(strategy,total_laps):
+                if validate_strategy(
+                    strategy,
+                    total_laps
+                ):
                     
-                    strategies.append(strategy)
+                    strategy_key = tuple(strategy)
+
+                    if strategy_key not in strategy_set:
+
+                        strategy_set.add(strategy_key)
+
+                        strategies.append(strategy)
 
     # 2-stop
+    
+    STINT_STEP = 3
 
     for compound1 in DRY_COMPOUNDS:
 
@@ -81,12 +94,14 @@ def generate_strategies(total_laps):
 
                 for stint1 in range(
                     MIN_STINT[compound1],
-                    MAX_STINT[compound1] + 1,3
+                    MAX_STINT[compound1] + 1,
+                    STINT_STEP
                 ):
 
                     for stint2 in range(
                         MIN_STINT[compound2],
-                        MAX_STINT[compound2] + 1,3
+                        MAX_STINT[compound2] + 1,
+                        STINT_STEP
                     ):
 
                         stint3 = (
@@ -108,8 +123,21 @@ def generate_strategies(total_laps):
                             (compound3, stint3)
                         ]
                         
-                        if validate_strategy(strategy,total_laps):
-                            strategies.append(strategy)
+                        if validate_strategy(
+    strategy,
+    total_laps
+):
+                            strategy_key = tuple(strategy)
+
+                            if strategy_key not in strategy_set:
+
+                                strategy_set.add(strategy_key)
+
+                                strategies.append(strategy)
+
+    strategies.sort(
+        key=len
+    )
 
     return strategies
 

@@ -54,6 +54,7 @@ deg_model_path = os.path.join(
 with open(base_pace_path, "rb") as f:
 
     track_base_pace = pickle.load(f)
+    print(track_base_pace.keys())
 
 with open(deg_model_path, "rb") as f:
 
@@ -63,21 +64,55 @@ with open(deg_model_path, "rb") as f:
 
 def get_base_pace(track):
 
-    return track_base_pace[track] + 4.5
+    if track in track_base_pace:
+        return track_base_pace[track] + 4.5
+
+    candidates = [
+
+        key
+
+        for key in track_base_pace
+
+        if key.startswith(track.lower())
+
+    ]
+
+    if len(candidates) == 0:
+
+        raise ValueError(
+            f"No base pace model found for {track}"
+        )
+
+    latest = sorted(candidates)[-1]
+
+    return track_base_pace[latest] + 4.5
 
 # Tyre degradation
 
 def get_degradation(
     track,
     compound,
-    tyre_age
+    tyre_age,
+    weekend_tyre_model=None
 ):
 
     track_data = get_track_parameters(track)
 
-    deg = (
-        track_data["compound_deg"][compound]
-    )
+    if (
+
+        weekend_tyre_model is not None
+
+        and
+
+        compound in weekend_tyre_model
+
+    ):
+
+        deg = weekend_tyre_model[compound]["weekend"]
+
+    else:
+
+        deg = track_data["compound_deg"][compound]
 
     cliff_age = (
         track_data["cliff_age"][compound]
@@ -173,7 +208,10 @@ def compute_lap_time(
     team="Red Bull",
     position=1,
     stint=1,
-    race_year=2024
+    race_year=2024,
+    weekend_tyre_model = None,
+    driver_rating=None,
+    team_strength=None
 ):
 
     track_data = get_track_parameters(track)
@@ -204,12 +242,21 @@ def compute_lap_time(
     base_pace = get_base_pace(track)
 
     degradation = (
+
         get_degradation(
+
             track,
+
             compound,
-            tyre_age
+
+            tyre_age,
+
+            weekend_tyre_model
+
         )
+
         * deg_multiplier
+
     )
 
     compound_offset = (

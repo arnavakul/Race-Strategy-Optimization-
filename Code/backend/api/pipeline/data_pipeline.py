@@ -532,7 +532,7 @@ def run_weekend_pipeline():
     # ]
     
     tracks = [
-        "Barcelona",
+        "Austria",
     ]
 
     sessions = [

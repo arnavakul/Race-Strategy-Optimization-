@@ -4,13 +4,15 @@ import statistics
 from api.models.simulation.race_executor import (
     execute_race
 )
+
 from api.models.simulation.strategy_simulation import (
     simulate_strategy
 )
 
 from api.models.optimization.strategy_generator import (
-    generate_strategies 
+    generate_strategies
 )
+
 
 def run_monte_carlo(
     track,
@@ -21,7 +23,6 @@ def run_monte_carlo(
 ):
 
     if seed is not None:
-
         random.seed(seed)
 
     race_times = []
@@ -32,7 +33,7 @@ def run_monte_carlo(
 
     legal_races = 0
 
-    for sim in range(simulations):
+    for _ in range(simulations):
 
         result = execute_race(
 
@@ -41,6 +42,7 @@ def run_monte_carlo(
             starting_compound=starting_compound,
 
             total_laps=total_laps
+
         )
 
         race_times.append(
@@ -49,16 +51,14 @@ def run_monte_carlo(
 
         safety_car_deployments.append(
 
-            result[
-                "safety_car_deployments"
-            ]
+            result["safety_car_deployments"]
+
         )
 
         vsc_deployments.append(
 
-            result[
-                "vsc_deployments"
-            ]
+            result["vsc_deployments"]
+
         )
 
         if result["legal_race"]:
@@ -67,81 +67,53 @@ def run_monte_carlo(
 
     race_times.sort()
 
-    average_time = statistics.mean(
-        race_times
-    )
-
-    median_time = statistics.median(
-        race_times
-    )
-
-    best_case = min(
-        race_times
-    )
-
-    worst_case = max(
-        race_times
-    )
-
-    std_dev = statistics.stdev(
-        race_times
-    )
-
-    p5 = race_times[
-        int(
-            len(race_times) * 0.05
-        )
-    ]
-
-    p95 = race_times[
-        int(
-            len(race_times) * 0.95
-        )
-    ]
-
-    average_sc = statistics.mean(
-        safety_car_deployments
-    )
-
-    average_vsc = statistics.mean(
-        vsc_deployments
-    )
-
-    legality_rate = (
-        legal_races
-        / simulations
-    )
-
     return {
 
         "simulations": simulations,
 
-        "average_time": average_time,
+        "average_time": statistics.mean(race_times),
 
-        "median_time": median_time,
+        "median_time": statistics.median(race_times),
 
-        "best_case": best_case,
+        "best_case": min(race_times),
 
-        "worst_case": worst_case,
+        "worst_case": max(race_times),
 
-        "std_dev": std_dev,
+        "std_dev": (
+            statistics.stdev(race_times)
+            if len(race_times) > 1
+            else 0
+        ),
 
-        "p5": p5,
+        "p5": race_times[
+            int(len(race_times) * 0.05)
+        ],
 
-        "p95": p95,
+        "p95": race_times[
+            int(len(race_times) * 0.95)
+        ],
 
-        "average_sc": average_sc,
+        "average_sc": statistics.mean(
+            safety_car_deployments
+        ),
 
-        "average_vsc": average_vsc,
+        "average_vsc": statistics.mean(
+            vsc_deployments
+        ),
 
-        "legality_rate": legality_rate,
+        "legality_rate": (
+            legal_races
+            / simulations
+        ),
 
         "race_times": race_times
+
     }
+
 
 def run_strategy_monte_carlo(
     strategy,
-    track,
+    race_context,
     simulations=100,
     seed=None
 ):
@@ -152,196 +124,99 @@ def run_strategy_monte_carlo(
 
     race_times = []
 
-    finish_positions = []
-    
     for _ in range(simulations):
 
         simulation = simulate_strategy(
 
-            track=track,
+            race_context=race_context,
 
             strategy=strategy
+
         )
 
         race_times.append(
 
             simulation["total_time"]
-        )
-        
-        finish_positions.append(
-            simulation["final_position"]
+
         )
 
     race_times.sort()
-
-    average_time = statistics.mean(
-        race_times
-    )
-    
-    average_finish = statistics.mean(
-        finish_positions
-    )
-    
-    podiums = len(
-
-        [
-
-            pos
-
-            for pos
-
-            in finish_positions
-
-            if pos <= 3
-
-        ]
-
-    )
-
-    podium_probability = (
-
-            podiums
-
-            / simulations
-
-        ) * 100
-        
-    wins = len(
-
-        [
-
-            pos
-
-            for pos
-
-            in finish_positions
-
-            if pos == 1
-
-        ]
-
-    )
-
-    win_probability = (
-
-        wins
-
-        / simulations
-
-    ) * 100
-
-    median_time = statistics.median(
-        race_times
-    )
-
-    best_case = min(
-        race_times
-    )
-
-    worst_case = max(
-        race_times
-    )
-
-    std_dev = statistics.stdev(
-        race_times
-    )
-
-    p5 = race_times[
-        int(
-            len(race_times) * 0.05
-        )
-    ]
-
-    p95 = race_times[
-        int(
-            len(race_times) * 0.95
-        )
-    ]
 
     return {
 
         "simulations": simulations,
 
-        "average_time": average_time,
+        "average_time": statistics.mean(
+            race_times
+        ),
 
-        "median_time": median_time,
+        "median_time": statistics.median(
+            race_times
+        ),
 
-        "best_case": best_case,
+        "best_case": min(
+            race_times
+        ),
 
-        "worst_case": worst_case,
+        "worst_case": max(
+            race_times
+        ),
 
-        "std_dev": std_dev,
+        "std_dev": (
+            statistics.stdev(race_times)
+            if len(race_times) > 1
+            else 0
+        ),
 
-        "p5": p5,
+        "p5": race_times[
+            int(len(race_times) * 0.05)
+        ],
 
-        "p95": p95,
+        "p95": race_times[
+            int(len(race_times) * 0.95)
+        ],
 
-        "race_times": race_times,
-        
-        "average_finish": average_finish,
+        "race_times": race_times
 
-        "podium_probability":
-            podium_probability,
-
-        "win_probability":
-            win_probability,
-            
     }
-# TESTING
+
+
+# ---------------- TESTING ---------------- #
 
 if __name__ == "__main__":
 
-    print("\nSTARTING STRATEGY OPTIMIZER...\n")
+    print("\nSTARTING STRATEGY MONTE CARLO\n")
 
     strategies = generate_strategies(57)
 
     print(
-        f"Generated Strategies: "
-        f"{len(strategies)}"
+        f"Generated {len(strategies)} strategies"
     )
 
-    # Only test first few strategies while debugging
-    strategies = strategies[:10]
+    race_context = {
 
-    print(
-        f"Testing First "
-        f"{len(strategies)} "
-        f"Strategies\n"
-    )
+        "track": "monza_2022",
 
-    for i, strategy in enumerate(
-        strategies,
-        start=1
-    ):
+        "total_laps": 57,
 
-        print(
-            f"\n[{i}/{len(strategies)}] "
-            f"Testing Strategy:"
-        )
+        "track_characteristics": {}
 
-        print(strategy)
+    }
 
-        mc_result = run_strategy_monte_carlo(
+    for strategy in strategies[:5]:
+
+        print("\n", strategy)
+
+        result = run_strategy_monte_carlo(
 
             strategy=strategy,
 
-            track="monza_2022",
+            race_context=race_context,
 
             simulations=5
+
         )
 
-        print(
-            f"Average Time: "
-            f"{mc_result['average_time']:.3f}"
-        )
+        print(result["average_time"])
 
-        print(
-            f"Std Dev: "
-            f"{mc_result['std_dev']:.3f}"
-        )
-
-        print("-" * 50)
-
-    print(
-        "\nDEBUG TEST COMPLETE\n"
-    )
+    print("\nDONE\n")

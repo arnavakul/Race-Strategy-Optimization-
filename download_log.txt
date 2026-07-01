@@ -80,3 +80,7 @@ Zandvoort,2025,FP3
 Zandvoort,2025,Q
 Zandvoort,2025,R
 Monaco,2026,FP3
+Austria,2026,FP1
+Austria,2026,FP2
+Austria,2026,FP3
+Austria,2026,Q

@@ -329,22 +329,99 @@ for track in tracks:
             ] = default_warmup[
                 compound
             ]
+            
+    degradation_samples = {}
+
+    for compound in [
+
+        "SOFT",
+        "MEDIUM",
+        "HARD"
+
+    ]:
+
+        degradation_samples[
+            compound
+        ] = int(
+
+            len(
+
+                track_df[
+                    (
+                        track_df["Compound"] == compound
+                    )
+
+                    &
+
+                    (
+                        track_df["TyreLife"] >= 3
+                    )
+                ]
+
+            )
+
+        )
+
+    compound_usage = {}
+
+    for compound in [
+
+        "SOFT",
+        "MEDIUM",
+        "HARD"
+
+    ]:
+
+        compound_usage[
+            compound
+        ] = int(
+
+            len(
+
+                track_df[
+                    track_df["Compound"] == compound
+                ]
+
+            )
+
+        )
 
     track_characteristics[
         track
     ] = {
 
+        "total_laps":
+            int(
+                track_df["LapNumber"].max()
+            ),
+
+        "average_race_lap":
+            round(
+                float(
+                    track_df[
+                        "LapTimeSeconds"
+                    ].mean()
+                ),
+                3
+            ),
+        
+        "compound_usage":
+        compound_usage,
+
         "compound_pace_delta":
             compound_pace_delta,
 
-        "compound_deg":
+        "historical_degradation":
             compound_deg,
 
         "cliff_age":
             cliff_age,
 
         "warmup_penalty":
-            warmup_penalty
+            warmup_penalty,
+            
+        "degradation_samples":
+            degradation_samples,
     }
 
 
